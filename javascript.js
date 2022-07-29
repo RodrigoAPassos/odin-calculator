@@ -1,203 +1,94 @@
-//--Add func--
-function add (a, b) {
-    let nA = Number(a);
-    let nB = Number(b);
-    return nA + nB;
-}
+let firstNum = null;
+let secondNum = null;
+let operator = null;
+let result = null;
+let dispValue = "0";
 
-//--Subtract func--
-function sub (a, b) {
-    let nA = Number(a);
-    let nB = Number(b);
-    return nA - nB;
-}
-
-//--Multiply func--
-function mult (a, b) {
-    let nA = Number(a);
-    let nB = Number(b);
-    return nA * nB;
-}
-
-//--Divide func--
-function divide (a, b) {
-    let nA = Number(a);
-    let nB = Number(b);
-    return nA / nB;
-}
-/*
-//--Operate func--
-function operate (oprt, a, b) {
-    let n = 0;
-    if (oprt == "add") {
-        n = add(a, b);
-        display(n);
-        enterNum("");
-    }else if (oprt == "sub") {
-        n = sub(a, b);
-        display(n);
-        enterNum("");
-    }else if (oprt == "mult") {
-        n = mult(a, b);
-        display(n);
-        enterNum("");
-    }else if (oprt == "divide") {
-        n = divide(a, b);
-        display(n);
-        enterNum("");
-    }
-}
-
-function enterNum (n) {
-    const numButton = document.querySelector(".numberButtons");
-    numButton.querySelectorAll("button").forEach((button) => {
-        button.addEventListener("click", () => {
-            n = n + button.className;
-            display(n);
-            clear();
-            operator(n);
-        })
-    });
-}
-
-function enterNum2 (n, a, oprt) {
-    const numButton = document.querySelector(".numberButtons");
-    numButton.querySelectorAll("button").forEach((button) => {
-        button.addEventListener("click", () => {
-            n = n + button.className;
-            display(n);
-            cleared();
-            equal(a, oprt, n);
-        })
-    });
-}
-
-function display(n) {
-    let disp = document.querySelector(".display");
-    if (n == "") {
-        disp.innerHTML = "0";
-    }else disp.innerHTML = n;
-}
-
-function operator(n) {
-    let opButtons = document.querySelector(".operatorButtons");
-    opButtons.querySelectorAll("button").forEach((button) =>{
-        button.addEventListener("click", () =>{
-            let oprt = button.className;
-            let a = n;
-            enterNum2("", a, oprt);
-        })
-    });
-}
-
-function equal(a, oprt, n) {
-    let other = document.querySelector(".others");
-    other.querySelector(".equals").addEventListener("click", () => {
-        let b = n;
-        operate(oprt, a, b);
-    })
-}
-
-function clear() {
-    document.querySelector(".clear").addEventListener("click", () => {
-        display("");
-        enterNum("");
-    })
-}
-
-function cleared() {
-    document.querySelector(".clear").addEventListener("click", () => {
-        enterNum2("");
-    })
-}
-
-function start () {
-    display("");
-    enterNum("");
-}
-
-start();*/
-function start() {
-    enterNum();
-    clear();
-    operator();
-}
-
-function enterNum() {
-    const numButtons = document.querySelector(".numberButtons");
-    numButtons.querySelectorAll("button").forEach((button) => {
-        button.addEventListener("click", () => display("show", button.className))
-    })
-}
-
-function display(status, n) {
+function display() {
     const disp = document.querySelector(".display");
-    switch(status){
-        case "clear":
-            disp.innerHTML = "0";
-        case "show":
-            if(disp.innerHTML == "0"){
-                disp.innerHTML = n;
-            } else {
-            disp.innerHTML = disp.innerHTML + n;
-            }
+    //1st operation
+    if (result == null && operator == null) {
+        firstNum = Number(dispValue);
+    //2nd operation
+    }else if (result != null && operator == null) {
+        firstNum = result;
+        result = null;
+        dispValue = "0";
+        secondNum = Number(dispValue);
+    //1st operation 2nd number
+    }else if (result == null && operator != null) {
+        secondNum = Number(dispValue);
+    //result
+    }else if (result != null && operator != null) {
+        dispValue = result;
+        operator = null;
+        secondNum = null;
+        firstNum = null;
     }
+    disp.innerHTML = dispValue;
+    console.log(firstNum, secondNum, operator, result);
 }
 
 function getNumber() {
-    const disp = document.querySelector(".display");
-    return disp.innerHTML;
-}
-
-function clear() {
-    document.querySelector(".clear").addEventListener("click", () => display("clear", ""));
-}
-
-function cleared () {
-    display("clear", "0");
-}
-
-function operator () {
-    const oprtr = document.querySelector(".operatorButtons");
-    oprtr.querySelectorAll("button").forEach((button) => {
+    const numButton = document.querySelector(".numberButtons");
+    numButton.querySelectorAll("button").forEach((button) => {
         button.addEventListener("click", () => {
-        let a = getNumber();
-        let opr = button.className;
-        cleared();
-        console.log(a, opr);
-        equalsTo(a, opr);
+            if (dispValue == "0") {
+                dispValue = button.className;
+                //display();
+            }else if (dispValue != "0" && result != null){
+                dispValue = button.className;
+            }else {
+                dispValue = dispValue + button.className;
+                //display();
+            }display();
         })
     })
 }
 
-function equalsTo(a, opr) {
-    let result = 0;
-    document.querySelector(".equals").addEventListener("click", () => {
-        let b = getNumber();
-        console.log(a, b, opr);
-        operate(a, b, opr);
+display();
+getNumber();
+operate();
+
+function operate () {
+    const oprButton = document.querySelector(".operatorButtons");
+    oprButton.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("click", () => {
+            let btn = button.className;
+            if (btn == "add" && operator == null) {
+                operator = btn;
+                dispValue = "0";
+                //display();
+            } else if (btn == "sub" && operator == null) {
+                operator = btn;
+                dispValue = "0";
+                //display();
+            }else if (btn == "mult" && operator == null) {
+                operator = btn;
+                dispValue = "0";
+                //display();
+            }else if (btn == "divide" && operator == null) {
+                operator = btn;
+                dispValue = "0";
+                //display();
+            }else if (btn == "clear" && secondNum == null) {
+                firstNum = null;
+                result = null;
+                dispValue = "0";
+                //display();
+            }else if (btn == "clear" && secondNum != null) {
+                secondNum = null;
+                dispValue = "0";
+                //display();
+            }else if (btn == "equals" && operator == "add") {
+                result = firstNum + secondNum;
+            }else if (btn == "equals" && operator == "sub") {
+                result = firstNum - secondNum;
+            }else if (btn == "equals" && operator == "mult") {
+                result = firstNum * secondNum;
+            }else if (btn == "equals" && operator == "divide") {
+                result = firstNum / secondNum;
+            }display();
+        })
     })
 }
-
-function operate(a, b, opr) {
-    if (opr == "add") {
-        result = add(a, b);
-        cleared();
-        console.log(result);
-        display("show", result);
-    } else if (opr == "sub") {
-        result = sub(a, b);
-        cleared();
-        display("show", result);
-    } else if (opr == "mult") {
-        result = mult(a, b);
-        cleared();
-        display("show", result);
-    } else if (opr == "divide") {
-        result = divide(a, b);
-        cleared();
-        display("show", result);
-    }
-}
-
-start();
