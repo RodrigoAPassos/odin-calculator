@@ -9,24 +9,19 @@ function display() {
     //1st operation
     if (result == null && operator == null) {
         firstNum = Number(dispValue);
-    //2nd operation
-    }else if (result != null && operator == null) {
-        firstNum = result;
-        result = null;
-        dispValue = "0";
-        secondNum = Number(dispValue);
     //1st operation 2nd number
     }else if (result == null && operator != null) {
         secondNum = Number(dispValue);
     //result
     }else if (result != null && operator != null) {
         dispValue = result;
+        result = null;
         operator = null;
         secondNum = null;
-        firstNum = null;
+        firstNum = dispValue;
     }
     disp.innerHTML = dispValue;
-    console.log(firstNum, secondNum, operator, result);
+    //console.log(firstNum, secondNum, operator, result);
 }
 
 function getNumber() {
@@ -35,12 +30,8 @@ function getNumber() {
         button.addEventListener("click", () => {
             if (dispValue == "0") {
                 dispValue = button.className;
-                //display();
-            }else if (dispValue != "0" && result != null){
-                dispValue = button.className;
             }else {
                 dispValue = dispValue + button.className;
-                //display();
             }display();
         })
     })
@@ -58,28 +49,22 @@ function operate () {
             if (btn == "add" && operator == null) {
                 operator = btn;
                 dispValue = "0";
-                //display();
             } else if (btn == "sub" && operator == null) {
                 operator = btn;
                 dispValue = "0";
-                //display();
             }else if (btn == "mult" && operator == null) {
                 operator = btn;
                 dispValue = "0";
-                //display();
             }else if (btn == "divide" && operator == null) {
                 operator = btn;
                 dispValue = "0";
-                //display();
             }else if (btn == "clear" && secondNum == null) {
                 firstNum = null;
                 result = null;
                 dispValue = "0";
-                //display();
             }else if (btn == "clear" && secondNum != null) {
                 secondNum = null;
                 dispValue = "0";
-                //display();
             }else if (btn == "equals" && operator == "add") {
                 result = firstNum + secondNum;
             }else if (btn == "equals" && operator == "sub") {
