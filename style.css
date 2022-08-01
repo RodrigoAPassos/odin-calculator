@@ -4,20 +4,48 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    width: 270px;
+    width: 300px;
     margin: auto;
 }
 
 .header {
-    margin: 15px;
+    margin: 15px 0px;
     text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.up {
+    border: 3px solid black;
+    border-bottom: 0px;
+    border-radius: 12px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    background-color: lightgoldenrodyellow;
+    color: black;
 }
 
 .mid {
     display: flex;
     margin: 0;
-    width: 250px;
+    width: 270px;
     justify-content: space-around;
+    border-right: 3px solid black;
+    border-left: 3px solid black;
+    padding: 0px 17px;
+    background-color: lightgoldenrodyellow;
+}
+
+.down {
+    border: 3px solid black;
+    border-top: 0px;
+    border-radius: 12px;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    width: 304px;
+    text-align: center;
+    background-color: lightgoldenrodyellow;
+    color: black;
 }
 
 .numberButtons {
@@ -26,21 +54,58 @@ body {
     width: 165px;
 }
 
+#zero {
+    width: 104px;
+}
 
+.operatorButtons {
+    width: 110px;
+}
 
-.operatorButtons  button {
+.operatorButtons button {
     display: flex;
     flex-direction: column;
-    border: 1px solid lightslategray;
+    border: 2px solid lightslategray;
     margin: 2px;
     height: 50px;
     width: 50px;
     justify-content: center;
     align-items:center;
+    font-weight: bold;
+    font-size: large;
+}
+
+.operatorButtons .clear {
+    width: 104px;
 }
 
 .operatorButtons  button.equals {
-    width: 80px;
+    width: 104px;
+}
+
+.operatorButtons  button.equals:hover {
+    background-color: lightgreen;
+    transform:scale(1.05);
+}
+
+.numberButtons button:hover {
+    background-color: lightgray;
+    transform:scale(1.1);
+}
+
+.op button:hover {
+    background-color:wheat;
+    transform:scale(1.1);
+}
+
+.operatorButtons .clear:hover {
+    background-color: lightcoral;
+    transform:scale(1.05);
+}
+
+.op {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .numberButtons button {
@@ -48,16 +113,24 @@ body {
     margin: 2px;
     height: 50px;
     width: 50px;
+    font-weight: bold;
+    font-size: large;
 }
 
 .display {
-    width: 250px;
+    width: 270px;
     height: 35px;
-    border: 2px solid black;
+    border: 4px solid black;
     border-radius: 8px;
     padding: 5px;
     font-size: 30px;
     text-align: right;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 15px 8px;
+    background-color: white;
+}
+
+.footer {
     margin: 15px;
+    font-family:Arial, Helvetica, sans-serif
 }
